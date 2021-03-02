@@ -49,7 +49,7 @@ module.exports = [
 
 	// get user info
 	{
-		url: '/react-material-admin/user/info\.*',
+		url: '/react-material-admin/user/info\\.* ',
 		type: 'get',
 		response: config => {
 			const { token } = config.query;
