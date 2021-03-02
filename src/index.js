@@ -16,7 +16,7 @@ import reportWebVitals from './reportWebVitals';
  * please remove it before going online ! ! !
  */
 if (process.env.NODE_ENV === 'production') {
-	const { mockXHR } = require('../mock');
+	const { mockXHR } = require('./mock');
 	mockXHR();
 }
 
