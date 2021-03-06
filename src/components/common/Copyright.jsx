@@ -7,14 +7,14 @@ function Copyright(props) {
 			variant="body2"
 			color="textSecondary"
 			align="center"
-			className={classes.footer}>
-			{"Copyright @"}
+			className={ classes.footer }>
+			{"Copyright @" }
 			<Link color="inherit" href="/">
-				CZF
+				czfadmin
 			</Link>
-			{""}
-			{new Date().getFullYear()}
-			{"."}
+			{"" }
+			{new Date().getFullYear() }
+			{"." }
 		</Typography>
 	);
 }

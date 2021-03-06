@@ -1,11 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import {
+	FirebaseAuthProvider,
+	FirebaseAuthConsumer,
+	IfFirebaseAuthed,
+	IfFirebaseAuthedAnd,
+} from "@react-firebase/auth";
+import { config } from "./firebase.config";
+import store from "./app/store";
 
-import store from './app/store';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 
 /**
  * If you don't want to use mock-server
@@ -15,18 +23,19 @@ import reportWebVitals from './reportWebVitals';
  * Currently MockJs will be used in the production environment,
  * please remove it before going online ! ! !
  */
-if (process.env.NODE_ENV === 'production') {
-	const { mockXHR } = require('./mock');
+if (process.env.NODE_ENV === "production") {
+	const { mockXHR } = require("./mock");
 	mockXHR();
 }
 
 ReactDOM.render(
-	<React.StrictMode>
-		<Provider store={ store }>
+	<Provider store={store}>
+		<BrowserRouter>
 			<App />
-		</Provider>
-	</React.StrictMode>,
-	document.getElementById('root')
+		</BrowserRouter>
+	</Provider>,
+
+	document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

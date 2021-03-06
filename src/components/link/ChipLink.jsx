@@ -1,6 +1,9 @@
+import React from "react";
+
 import { withStyles } from "@material-ui/core";
 import Chip from "@material-ui/core/Chip";
-import { Link as RouterLink } from "@reach/router";
+import PropTypes from "prop-types";
+import { Link as RouterLink } from "react-router-dom";
 function ChipLink(props) {
 	const { classes, label, icon, primary, color, clickable, to } = props;
 	const routerLink = React.useMemo(() =>
@@ -23,6 +26,7 @@ function ChipLink(props) {
 			icon={icon}
 			color={color ? color : "primary"}
 			label={label}
+			variant="outlined"
 			clickable={clickable ? clickable : true}
 		/>
 	);
