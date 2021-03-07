@@ -2,12 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
+// import * as firebase from "firebase/app";
+import firebase from "firebase/app";
+import "firebase/auth";
 import {
 	FirebaseAuthProvider,
 	FirebaseAuthConsumer,
 	IfFirebaseAuthed,
 	IfFirebaseAuthedAnd,
 } from "@react-firebase/auth";
+
 import { config } from "./firebase.config";
 import store from "./app/store";
 
@@ -29,12 +33,13 @@ if (process.env.NODE_ENV === "production") {
 }
 
 ReactDOM.render(
-	<Provider store={store}>
-		<BrowserRouter>
-			<App />
-		</BrowserRouter>
-	</Provider>,
-
+	<FirebaseAuthProvider firebase={firebase} {...config}>
+		<Provider store={store}>
+			<BrowserRouter>
+				<App />
+			</BrowserRouter>
+		</Provider>
+	</FirebaseAuthProvider>,
 	document.getElementById("root")
 );
 

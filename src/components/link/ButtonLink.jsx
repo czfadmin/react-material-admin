@@ -1,51 +1,36 @@
 import React from "react";
-
-import { withStyles } from "@material-ui/core";
-import Chip from "@material-ui/core/Chip";
+import clsx from "clsx";
+import { Button, withStyles } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
 import PropTypes from "prop-types";
 function ButtonLink(props) {
-	const {
-		classes,
-		label,
-		icon,
-		primary,
-		color,
-		clickable,
-		variant,
-		to,
-	} = props;
+	const { classes, icon, color, variant, title, to, className } = props;
 	const routerLink = React.useMemo(() =>
 		React.forwardRef(
-			(itemProps, ref) => (
-				<RouterLink
-					to={to}
-					{...itemProps}
-					ref={ref}
-					className="no-underline"
-				/>
-			),
+			(itemProps, ref) => <RouterLink to={to} {...itemProps} ref={ref} />,
 			[to]
 		)
 	);
 	return (
-		<Chip
+		<Button
 			component={routerLink}
-			primary={primary}
-			icon={icon}
-			label={label}
+			className={clsx(classes.button, `${className}`)}
+			color={color}
 			variant={variant ? variant : "outlined"}
-			color={color ? color : "primary"}
-			clickable={clickable ? clickable : true}
-		/>
+			startIcon={icon ? icon : null}>
+			{title}
+			{console.log("Button Link")}
+		</Button>
 	);
 }
 ButtonLink.propTypes = {
 	icon: PropTypes.element,
 	label: PropTypes.string,
 	color: PropTypes.string,
-	primary: PropTypes.string.isRequired,
+	// primary: PropTypes.string.isRequired,
 	to: PropTypes.string.isRequired,
-	classes: PropTypes.string,
 };
-export default withStyles((theme) => ({}))(ButtonLink);
+export default withStyles((theme) => ({
+	link: {},
+	button: {},
+}))(ButtonLink);

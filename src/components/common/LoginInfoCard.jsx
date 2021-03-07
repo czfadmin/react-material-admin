@@ -5,10 +5,10 @@ function LoginInfoCard(props) {
 	return (
 		<div
 			className="min-h-full
-						min-w-full lg:self-center
-						justify-items-center
+						min-w-full
 						flex
 						flex-col
+						self-center
 						justify-center">
 			<Typography variant="h4" className="text-center m-2 p-2">
 				Hi,Welcome Back!
@@ -16,7 +16,7 @@ function LoginInfoCard(props) {
 			<img
 				src={loginsvg}
 				alt="login"
-				className="self-center bg-cover min-h-full min-w-full"
+				className="self-center bg-cover min-w-full mt-8 "
 			/>
 		</div>
 	);

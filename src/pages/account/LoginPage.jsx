@@ -7,16 +7,16 @@ import {
 	FormControlLabel,
 	Checkbox,
 	Button,
-	Typography,
 	Hidden,
 } from "@material-ui/core";
+import firebase from "firebase/app";
 import clsx from "clsx";
-import { Link as RouterLink } from "react-router-dom";
-import firebaselogo from "../../ic_firebase.png";
-import SocialLogin from "../../components/common/SocialLogin";
+import { useDispatch } from "react-redux";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
+
 import LoginInfoCard from "../../components/common/LoginInfoCard";
 import LoginInfoTitle from "../../components/common/LoginInfoTitle";
-
+import { showSnackbar } from "../../features/snackbar/snackbarSlice";
 const styles = (theme) => ({
 	root: {
 		height: "100vh",
@@ -24,7 +24,6 @@ const styles = (theme) => ({
 		paddding: 0,
 	},
 	paper: {
-		// margin:
 		margin: "0 auto",
 	},
 	disabled: {
@@ -32,12 +31,45 @@ const styles = (theme) => ({
 	},
 	loginContainer: {
 		display: "flex",
-
-		// margin: ,
 	},
 });
 function LoginPage(props) {
 	const { classes } = props;
+	const location = useNavigate();
+	const dispatch = useDispatch();
+	const signInAnonymously = (event) => {
+		event.preventDefault();
+		firebase
+			.auth()
+			.signInAnonymously()
+			.then((data) => {
+				// {
+				//   "kind": "",
+				//   "idToken": "",
+				//   "refreshToken": "",
+				//   "expiresIn": "3600",
+				//   "localId": ""
+				// }
+				if (data) {
+					const { idToken, refreshToken, localId } = data;
+				}
+				dispatch(showSnackbar("Login successful"));
+
+				location("/");
+			})
+			.catch((error) => {
+				var errorCode = error.code;
+				var errorMessage = error.message;
+
+				if (errorCode === "auth/operation-not-allowed") {
+					alert(
+						"You must enable Anonymous auth in the Firebase Console."
+					);
+				} else {
+					console.error(error);
+				}
+			});
+	};
 	return (
 		<Grid
 			container
@@ -51,7 +83,7 @@ function LoginPage(props) {
 					sm={false}
 					lg={5}
 					md={5}
-					className="flex shadow-xl">
+					className="flex flex-col shadow-xl items-center">
 					<LoginInfoCard />
 				</Grid>
 			</Hidden>
@@ -96,11 +128,10 @@ function LoginPage(props) {
 						className={clsx(classes.loginContainer, "")}>
 						<div className="w-3/4 lg:w-2/4 md:w-2/4 sm:w-3/4 xl:3/4 flex flex-col items-center min-w-full sm:min-h-full justify-center">
 							<LoginInfoTitle />
-
 							<div
 								className={clsx(
 									classes.paper,
-									"p-2 self-center w-3/4 lg:w-2/4 md:2/4 sm:w-3/4 xl:3/4"
+									"p-0 self-center w-3/4 lg:w-2/4 md:2/4 sm:w-3/4 xl:3/4"
 								)}>
 								<div className="flex flex-col items-stretch"></div>
 								<form onSubmit={handleSubmit}>
@@ -136,16 +167,30 @@ function LoginPage(props) {
 										}
 										label="Remember me"
 									/>
-									<Button
-										type="submit"
-										fullWidth
-										size="large"
-										variant="contained"
-										color="primary"
-										disabled={isSubmitting}
-										className={classes.submit}>
-										Sign In
-									</Button>
+									<Grid container spacing={1}>
+										<Grid item xs md={6} lg={6} sm={6}>
+											<Button
+												size="large"
+												variant="outlined"
+												color="primary"
+												onClick={signInAnonymously}>
+												Sign in Anonymously
+											</Button>
+										</Grid>
+										<Grid item xs md={6} lg={6} sm={6}>
+											<Button
+												type="submit"
+												size="large"
+												variant="outlined"
+												color="primary"
+												fullWidth
+												disabled={isSubmitting}
+												className={classes.submit}>
+												Sign In
+											</Button>
+										</Grid>
+									</Grid>
+
 									<Grid container className="mt-2">
 										<Grid item xs>
 											<RouterLink

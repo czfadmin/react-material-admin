@@ -39,15 +39,8 @@ function SocialLogin(props) {
 		},
 	]);
 	return (
-		<div className="flex flex-row items-start min-w-full justify-center">
+		<div className="flex flex-row items-start min-w-full justify-center mt-4 sm:mt-2">
 			{socialItems.map((item) => (
-				// <ChipLink
-				// 	key={item.id}
-				// 	label={item.title}
-				// 	primary={item.primary}
-				// 	icon={item.icon}
-				// 	to={item.url}
-				// />
 				<Chip
 					className={clsx(classes.chip, "ml-2 mr-2 p-2")}
 					label={item.title}
