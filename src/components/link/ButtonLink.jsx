@@ -5,11 +5,12 @@ import { Link as RouterLink } from "react-router-dom";
 import PropTypes from "prop-types";
 function ButtonLink(props) {
 	const { classes, icon, color, variant, title, to, className } = props;
-	const routerLink = React.useMemo(() =>
-		React.forwardRef(
-			(itemProps, ref) => <RouterLink to={to} {...itemProps} ref={ref} />,
-			[to],
-		),
+	const routerLink = React.useMemo(
+		() =>
+			React.forwardRef((itemProps, ref) => (
+				<RouterLink to={to} {...itemProps} ref={ref} />
+			)),
+		[to],
 	);
 	return (
 		<Button

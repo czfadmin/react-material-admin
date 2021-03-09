@@ -12,7 +12,7 @@ const styles = (theme) => ({
 });
 function SocialLogin(props) {
 	const { classes } = props;
-	const [socialItems, setSocialItems] = useState([
+	const [socialItems] = useState([
 		{
 			id: 0,
 			title: "Twitter",

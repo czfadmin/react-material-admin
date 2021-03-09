@@ -1,4 +1,4 @@
-import { Avatar, Badge, withStyles } from "@material-ui/core";
+import { Avatar, withStyles } from "@material-ui/core";
 
 const StyledAvatar = withStyles((theme) => ({
 	root: {

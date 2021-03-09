@@ -7,7 +7,7 @@ function LoginInfoTitle(props) {
 	const { classes } = props;
 	return (
 		<div className="flex flex-col items-center min-w-full">
-			<div className="flex items-center w-3/4 sm:w-3/4 md:w-2/4 lg:w-2/4">
+			<div className="flex items-center w-3/4 sm:w-3/4 md:w-3/4 lg:w-2/4">
 				<div className="flex-auto">
 					<Typography variant="h5" component="h5">
 						Sign up to React Material Admin
@@ -26,7 +26,7 @@ function LoginInfoTitle(props) {
 			<div
 				className={clsx(
 					classes.divider,
-					"flex flex-row w-3/4 sm:w-3/4 justify-center",
+					"flex flex-row w-3/4 sm:w-3/4 md:w-3/4 lg:w-2/4  items-center",
 				)}>
 				<Typography
 					variant="body2"
@@ -39,19 +39,24 @@ function LoginInfoTitle(props) {
 }
 export default withStyles((theme) => ({
 	p: {
-		// "&:before": {
-		// 	content: "-",
-		// },
 		margin: "1rem",
 	},
 	divider: {
 		"&:before": {
-			content: "",
+			content: '""',
+			position: "relative",
+			display: "block",
 			width: "100%",
+			borderTop: "thin solid rgb(145 158 171 / 69%);",
+			transform: "translateY(50%)",
 		},
 		"&:after": {
-			content: ``,
+			content: '""',
+			position: "relative",
+			display: "block",
 			width: "100%",
+			borderTop: "thin solid rgb(145 158 171 / 69%);",
+			transform: "translateY(50%)",
 		},
 	},
 }))(LoginInfoTitle);

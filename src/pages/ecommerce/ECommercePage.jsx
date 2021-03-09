@@ -1,11 +1,17 @@
 import { Container, withStyles, Grid } from "@material-ui/core";
-import { Pagination } from "@material-ui/lab";
+
 import clsx from "clsx";
 import ProductCallary from "../../components/ecommerce/ProductCallary";
 import ShoppingBar from "../../components/ecommerce/ShoppingBar";
-
+import StyledPagination from "../../components/common/StyledPagination";
 const styles = (theme) => ({
 	root: {},
+	pagination: {
+		"&> *": {
+			outline: 0,
+			border: 0,
+		},
+	},
 });
 function ECommercePage(props) {
 	const { classes } = props;
@@ -23,11 +29,11 @@ function ECommercePage(props) {
 					<Grid container spacing={3}>
 						<ProductCallary />
 					</Grid>
-					<Pagination
+					<StyledPagination
 						count={10}
 						color="primary"
-						size="small"
-						className="mt-4"
+						size="medium"
+						className={clsx(classes.pagination, "my-2")}
 					/>
 				</div>
 			</Container>

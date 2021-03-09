@@ -3,7 +3,7 @@ import { Grid } from "@material-ui/core";
 
 import ProductInfoCard from "./ProductInfoCard";
 export default function ProductCallary() {
-	const [callaryState, setCallaryState] = useState([
+	const [callaryState] = useState([
 		{
 			id: 0,
 			title: "Nike Air Force 1 NDESTRUKT",

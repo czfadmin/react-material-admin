@@ -1,5 +1,4 @@
 import { withStyles, Typography, Card, CardContent } from "@material-ui/core";
-
 import clsx from "clsx";
 import { Rating } from "@material-ui/lab";
 import StyledBadge from "../common/StyledBadge";
@@ -30,6 +29,7 @@ function ProductInfoCard(props) {
 				<img
 					src={illustration}
 					className="bg-cover opacity-100 h-48 w-auto"
+					alt={data.title}
 				/>
 				<CardContent className={clsx(classes.cardContent, "")}>
 					<div className="flex flex-col min-w-full text-justify">
