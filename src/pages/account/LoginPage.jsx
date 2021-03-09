@@ -1,5 +1,5 @@
 import React from "react";
-import { Formik } from "formik";
+import { Formik, ErrorMessage } from "formik";
 import {
 	withStyles,
 	Grid,
@@ -21,7 +21,7 @@ const styles = (theme) => ({
 	root: {
 		height: "100vh",
 		overflow: "auto",
-		paddding: 0,
+		padding: 0,
 	},
 	paper: {
 		margin: "0 auto",
@@ -51,7 +51,7 @@ function LoginPage(props) {
 				//   "localId": ""
 				// }
 				if (data) {
-					const { idToken, refreshToken, localId } = data;
+					// const { idToken, refreshToken, localId } = data;
 				}
 				dispatch(showSnackbar("Login successful"));
 
@@ -59,11 +59,11 @@ function LoginPage(props) {
 			})
 			.catch((error) => {
 				var errorCode = error.code;
-				var errorMessage = error.message;
+				// var errorMessage = error.message;
 
 				if (errorCode === "auth/operation-not-allowed") {
 					alert(
-						"You must enable Anonymous auth in the Firebase Console."
+						"You must enable Anonymous auth in the Firebase Console.",
 					);
 				} else {
 					console.error(error);
@@ -98,16 +98,37 @@ function LoginPage(props) {
 						errors.email = "Required";
 					} else if (
 						!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
-							values.email
+							values.email,
 						)
 					) {
-						errors.email = "Invaliad email address";
+						errors.email = "Invalid email address";
 					}
 					return errors;
 				}}
-				onSubmit={(values, { setSumitting }) => {
+				onSubmit={(values, { setSubmitting }) => {
 					setTimeout(() => {
-						setSumitting(false);
+						setSubmitting(false);
+						firebase
+							.auth()
+							.signInWithEmailAndPassword(
+								values.email,
+								values.password,
+							)
+							.then((data) => {
+								dispatch(showSnackbar("Login successful"));
+								location("/");
+							})
+							.catch((error) => {
+								// if (
+								// 	error.code ==
+								// 	"auth/multi-factor-auth-required"
+								// ) {
+								// 	var resolver = error.resolver;
+								// 	var multiFactorHints = resolver.hints;
+								// } else {
+								// }
+								dispatch(showSnackbar(`Error:${error.code}`));
+							});
 					}, 400);
 				}}>
 				{({
@@ -131,9 +152,8 @@ function LoginPage(props) {
 							<div
 								className={clsx(
 									classes.paper,
-									"p-0 self-center w-3/4 lg:w-2/4 md:2/4 sm:w-3/4 xl:3/4"
+									"p-0 self-center w-3/4 lg:w-2/4 md:2/4 sm:w-3/4 xl:3/4",
 								)}>
-								<div className="flex flex-col items-stretch"></div>
 								<form onSubmit={handleSubmit}>
 									<TextField
 										variant="outlined"
@@ -144,8 +164,15 @@ function LoginPage(props) {
 										name="email"
 										label="Email Address"
 										autoComplete="email"
+										onChange={handleChange}
+										onBlur={handleBlur}
 										autoFocus
+										value={values.email}
 										className="text-white"
+									/>
+									<ErrorMessage
+										name="email"
+										component="div"
 									/>
 									<TextField
 										variant="outlined"
@@ -156,7 +183,14 @@ function LoginPage(props) {
 										name="password"
 										label="Password"
 										type="password"
+										onChange={handleChange}
+										onBlur={handleBlur}
+										value={values.password}
 										autoComplete="current-password"
+									/>
+									<ErrorMessage
+										name="password"
+										component="div"
 									/>
 									<FormControlLabel
 										control={
@@ -168,19 +202,31 @@ function LoginPage(props) {
 										label="Remember me"
 									/>
 									<Grid container spacing={1}>
-										<Grid item xs md={6} lg={6} sm={6}>
+										<Grid
+											item
+											xs={12}
+											md={8}
+											lg={8}
+											sm={12}>
 											<Button
-												size="large"
+												size="medium"
 												variant="outlined"
 												color="primary"
+												fullWidth
 												onClick={signInAnonymously}>
 												Sign in Anonymously
 											</Button>
 										</Grid>
-										<Grid item xs md={6} lg={6} sm={6}>
+										<Grid
+											item
+											xs={12}
+											md={4}
+											lg={4}
+											sm={12}
+											className="sm:mt-2">
 											<Button
 												type="submit"
-												size="large"
+												size="medium"
 												variant="outlined"
 												color="primary"
 												fullWidth

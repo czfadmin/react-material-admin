@@ -8,8 +8,8 @@ function ButtonLink(props) {
 	const routerLink = React.useMemo(() =>
 		React.forwardRef(
 			(itemProps, ref) => <RouterLink to={to} {...itemProps} ref={ref} />,
-			[to]
-		)
+			[to],
+		),
 	);
 	return (
 		<Button
@@ -19,7 +19,6 @@ function ButtonLink(props) {
 			variant={variant ? variant : "outlined"}
 			startIcon={icon ? icon : null}>
 			{title}
-			{console.log("Button Link")}
 		</Button>
 	);
 }
@@ -32,5 +31,9 @@ ButtonLink.propTypes = {
 };
 export default withStyles((theme) => ({
 	link: {},
-	button: {},
+	button: {
+		"&:focus": {
+			// border: 0,
+		},
+	},
 }))(ButtonLink);

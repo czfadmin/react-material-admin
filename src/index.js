@@ -7,9 +7,9 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import {
 	FirebaseAuthProvider,
-	FirebaseAuthConsumer,
-	IfFirebaseAuthed,
-	IfFirebaseAuthedAnd,
+	// FirebaseAuthConsumer,
+	// IfFirebaseAuthed,
+	// IfFirebaseAuthedAnd,
 } from "@react-firebase/auth";
 
 import { config } from "./firebase.config";
@@ -40,7 +40,7 @@ ReactDOM.render(
 			</BrowserRouter>
 		</Provider>
 	</FirebaseAuthProvider>,
-	document.getElementById("root")
+	document.getElementById("root"),
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -3,11 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 const userSlice = createSlice({
 	name: "user",
 	initialState: {
-
+		idToken: "",
+		refreshToken: "",
+		expiresIn: "",
+		email: "",
 	},
-	reducers: {
-	}
+	reducers: {},
 });
-
 
 export default userSlice.reducer;

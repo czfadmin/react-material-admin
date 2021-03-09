@@ -1,6 +1,5 @@
 import React from "react";
-import { Divider, Typography, withStyles } from "@material-ui/core";
-import { Link as RouterLink } from "react-router-dom";
+import { Typography, withStyles } from "@material-ui/core";
 import firebaselogo from "../../ic_firebase.png";
 import SocialLogin from "../../components/common/SocialLogin";
 import clsx from "clsx";
@@ -14,7 +13,7 @@ function LoginInfoTitle(props) {
 						Sign up to React Material Admin
 					</Typography>
 					<Typography variant="body1" paragraph>
-						Enter your deatils blew.
+						Enter your details blew.
 					</Typography>
 				</div>
 				<img
@@ -27,7 +26,7 @@ function LoginInfoTitle(props) {
 			<div
 				className={clsx(
 					classes.divider,
-					"flex flex-row w-3/4 sm:w-3/4 justify-center"
+					"flex flex-row w-3/4 sm:w-3/4 justify-center",
 				)}>
 				<Typography
 					variant="body2"

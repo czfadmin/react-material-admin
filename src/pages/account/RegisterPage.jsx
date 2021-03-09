@@ -22,14 +22,12 @@ const styles = (theme) => ({
 		paddding: 0,
 	},
 	paper: {
-		// margin:
 		margin: "0 auto",
 	},
 	disabled: {
 		disabled: "true",
 	},
 	registerContainer: {
-		// margin: ,
 	},
 });
 function RegisterPage(props) {

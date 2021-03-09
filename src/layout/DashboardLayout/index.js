@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import clsx from "clsx";
 import { Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { withStyles, Snackbar, Toolbar } from "@material-ui/core";
+import { withStyles, Snackbar } from "@material-ui/core";
 
 import DashboardHeader from "./DashboardHeader";
 import Copyright from "../../components/common/Copyright";
@@ -20,13 +20,12 @@ const DashboardLayout = (props) => {
 		dispatch(closeSnackbarAsync(timeout));
 	};
 	return (
-		<div className={clsx(classes.root, "min-w-full")}>
+		<div className={clsx(classes.root, "bg-gray-200")}>
 			<DashboardHeader />
-			<Toolbar className="h-16 sm:h-16" />
 			<div
 				className={clsx(
 					classes.contentContainer,
-					"flex flex-col items-center p-2 "
+					"flex flex-col  sm:pt-2 mt-2",
 				)}>
 				<Snackbar
 					anchorOrigin={{
@@ -34,7 +33,7 @@ const DashboardLayout = (props) => {
 						horizontal: "center",
 					}}
 					autoHideDuration={useSelector(
-						(state) => state.snackbar.autoHideDuration
+						(state) => state.snackbar.autoHideDuration,
 					)}
 					open={snackbarClosed}
 					onClose={() => snackbarHandleClose(1000)}
@@ -47,22 +46,25 @@ const DashboardLayout = (props) => {
 				</Snackbar>
 
 				<Outlet />
+				<Copyright />
 			</div>
-			<Copyright />
 		</div>
 	);
 };
 
 export default withStyles((theme) => ({
 	root: {
-		background: "linear-gradient(45deg,red 30%,blue 75%)",
+		// background: "linear-gradient(45deg,red 30%,blue 75%)!important",
 		// width: "100%",
-	},
-	contentContainer: {
 		height: "100vh",
 		overflow: "auto",
+		paddingTop: 52,
 	},
-	context: {
-		overflow: "auto",
+	contentContainer: {
+		// height: "100vh",
+		width: "100%",
+		marginTop: "1rem",
+		// height: "100%",
+		// overflow: "auto",
 	},
 }))(DashboardLayout);

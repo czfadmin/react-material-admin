@@ -10,12 +10,15 @@ import {
 	MenuItem,
 	Badge,
 	ListItemText,
+	Hidden,
 } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { FirebaseAuthConsumer } from "@react-firebase/auth";
 import clsx from "clsx";
 import firebase from "firebase/app";
-import { Menu as MenuIcon } from "@material-ui/icons";
+import { Menu as MenuIcon, ShoppingBasket } from "@material-ui/icons";
+import SettingsIcon from "@material-ui/icons/Settings";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import ButtonLink from "../../../components/link/ButtonLink";
 import avatar from "../../../logo.svg";
@@ -68,13 +71,20 @@ function DashboardHeader(props) {
 			<Toolbar
 				className={clsx(
 					classes.toolbar,
-					"flex flex-row  justify-start items-center mx-2"
+					"flex flex-row  justify-start items-center mx-2",
 				)}>
 				<div className="flex items-center">
-					<IconButton edge="start" color="inherit" aria-label="menu">
+					<IconButton
+						edge="start"
+						color="inherit"
+						aria-label="menu"
+						className={clsx(classes.iconButton)}>
 						<MenuIcon />
 					</IconButton>
-					<Typography variant="h6"> React Material Admin</Typography>
+					<Typography variant="h6" noWrap>
+						{" "}
+						React Material Admin
+					</Typography>
 				</div>
 
 				<div className="ml-auto">
@@ -83,11 +93,21 @@ function DashboardHeader(props) {
 							return (
 								<>
 									{isSignedIn ? (
-										<>
+										<Hidden xsDown>
+											<IconButton
+												edge="end"
+												color="primary"
+												className="mx-2">
+												<Badge
+													badgeContent={6}
+													color="primary">
+													<ShoppingCartIcon />
+												</Badge>
+											</IconButton>
 											<IconButton
 												edge="end"
 												color="inherit"
-												className="mx-1">
+												className="mx-2">
 												<Badge
 													badgeContent={5}
 													color="primary">
@@ -96,16 +116,26 @@ function DashboardHeader(props) {
 											</IconButton>
 											<IconButton
 												edge="end"
+												color="primary"
+												className="mx-2">
+												<Badge
+													badgeContent={6}
+													color="primary">
+													<SettingsIcon />
+												</Badge>
+											</IconButton>
+											<IconButton
+												edge="end"
 												color="inherit"
 												onClick={handleClick}
-												className="mx-1">
+												className="mx-2">
 												<Badge
 													badgeContent={4}
 													color="primary">
 													<Avatar src={avatar} />
 												</Badge>
 											</IconButton>
-										</>
+										</Hidden>
 									) : (
 										<ButtonLink
 											to="/login"
@@ -153,6 +183,23 @@ function DashboardHeader(props) {
 					</ListItemText>
 				</StyledMenuItem>
 			</StyleMenu>
+			<Hidden xsUp>
+				<div className="flex flex-col items-stretch min-w-full">
+					<FirebaseAuthConsumer>
+						{({ isSignedIn, user, providerId }) => {
+							return (
+								<>
+									{isSignedIn ? (
+										<ButtonLink to="/login" />
+									) : (
+										<ButtonLink to="/about" />
+									)}
+								</>
+							);
+						}}
+					</FirebaseAuthConsumer>
+				</div>
+			</Hidden>
 		</AppBar>
 	);
 }
@@ -161,6 +208,8 @@ export default withStyles((theme) => ({
 	appbar: {
 		backdropFilter: "blur(8px)",
 		backgroundColor: "rgba(255, 255, 255, 0.72)",
+
+		// backgroundColor: "#ccd7e0ad;",
 	},
 	toolbar: {
 		display: "flex",
@@ -172,4 +221,10 @@ export default withStyles((theme) => ({
 		zIndex: theme.zIndex.drawer + 1,
 	},
 	button: {},
+	iconButton: {
+		"&:focus": {
+			outline: 0,
+			border: 0,
+		},
+	},
 }))(DashboardHeader);
