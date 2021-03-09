@@ -7,6 +7,7 @@ import PageNotFound from "./pages/error/PageNotFound";
 import LoginPage from "./pages/account/LoginPage";
 import RegisterPage from "./pages/account/RegisterPage";
 import ECommercePage from "./pages/ecommerce/ECommercePage";
+import ProductInfoPage from "./pages/ecommerce/ProductInfoPage";
 
 const routes = [
 	{
@@ -15,6 +16,7 @@ const routes = [
 		children: [
 			{ path: "dashboard", element: <DashboardPage /> },
 			{ path: "ecommerce", element: <ECommercePage /> },
+			{ path: "product/:id", element: <ProductInfoPage /> },
 			{ path: "*", element: <Navigate to="/404" /> },
 		],
 	},

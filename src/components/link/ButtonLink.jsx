@@ -27,7 +27,6 @@ ButtonLink.propTypes = {
 	icon: PropTypes.element,
 	label: PropTypes.string,
 	color: PropTypes.string,
-	// primary: PropTypes.string.isRequired,
 	to: PropTypes.string.isRequired,
 };
 export default withStyles((theme) => ({
