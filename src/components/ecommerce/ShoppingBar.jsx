@@ -1,12 +1,13 @@
 import React from "react";
 import { withStyles } from "@material-ui/core";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import FolderIcon from "@material-ui/icons/Folder";
 import RestoreIcon from "@material-ui/icons/Restore";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import clsx from "clsx";
+
+import StyledBottomNavAction from "../common/StyledBottomNavAction";
 const styles = (theme) => ({
 	root: {
 		position: "absolute",
@@ -16,7 +17,7 @@ const styles = (theme) => ({
 		padding: 0,
 		overflow: "hidden",
 		backdropFilter: "blur(6px)",
-		backgroundColor: "#ccd7e0ad;",
+		backgroundColor: "#ccd7e0ad",
 	},
 });
 
@@ -33,22 +34,22 @@ function ShoppingBar(props) {
 				classes.root,
 				"flex flex-row min-w-full justify-center text-center self-center items-start",
 			)}>
-			<BottomNavigationAction
+			<StyledBottomNavAction
 				label="Recents"
 				value="recents"
 				icon={<RestoreIcon />}
 			/>
-			<BottomNavigationAction
+			<StyledBottomNavAction
 				label="Favorites"
 				value="favorites"
 				icon={<FavoriteIcon />}
 			/>
-			<BottomNavigationAction
+			<StyledBottomNavAction
 				label="Nearby"
 				value="nearby"
 				icon={<LocationOnIcon />}
 			/>
-			<BottomNavigationAction
+			<StyledBottomNavAction
 				label="Folder"
 				value="folder"
 				icon={<FolderIcon />}

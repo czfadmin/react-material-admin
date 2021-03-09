@@ -10,6 +10,7 @@ import DashboardHeader from "./DashboardHeader";
 import Copyright from "../../components/common/Copyright";
 import Alert from "../../components/common/Alert";
 import { closeSnackbarAsync } from "../../features/snackbar/snackbarSlice";
+import SettingSwipeableDrawer from "../../components/ecommerce/SettingSwipeableDrawer";
 const DashboardLayout = (props) => {
 	const { classes } = props;
 	const dispatch = useDispatch();
@@ -48,6 +49,7 @@ const DashboardLayout = (props) => {
 				<Outlet />
 				<Copyright />
 			</div>
+			<SettingSwipeableDrawer />
 		</div>
 	);
 };

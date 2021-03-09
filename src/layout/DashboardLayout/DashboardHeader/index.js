@@ -16,13 +16,15 @@ import { useDispatch } from "react-redux";
 import { FirebaseAuthConsumer } from "@react-firebase/auth";
 import clsx from "clsx";
 import firebase from "firebase/app";
-import { Menu as MenuIcon, ShoppingBasket } from "@material-ui/icons";
+import { Menu as MenuIcon } from "@material-ui/icons";
 import SettingsIcon from "@material-ui/icons/Settings";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import NotificationsIcon from "@material-ui/icons/Notifications";
+import StyledIconButton from "../../../components/common/StyledIconButton";
 import ButtonLink from "../../../components/link/ButtonLink";
 import avatar from "../../../logo.svg";
 import { showSnackbar } from "../../../features/snackbar/snackbarSlice";
+import { toggleSwipeableDrawer } from "../../../features/drawer/drawerSlice";
 const StyleMenu = withStyles({
 	paper: {
 		background: "#eeeeee;",
@@ -63,6 +65,9 @@ function DashboardHeader(props) {
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
+	const openSettingDrawer = () => {
+		dispatch(toggleSwipeableDrawer());
+	};
 	return (
 		<AppBar
 			position="fixed"
@@ -92,56 +97,59 @@ function DashboardHeader(props) {
 						{({ isSignedIn, user, providerId }) => {
 							return (
 								<>
+									<StyledIconButton
+										edge="end"
+										color="primary"
+										className="mx-5"
+										onClick={openSettingDrawer}>
+										<Badge badgeContent={6} color="primary">
+											<SettingsIcon />
+										</Badge>
+									</StyledIconButton>
 									{isSignedIn ? (
 										<Hidden xsDown>
-											<IconButton
+											<StyledIconButton
 												edge="end"
 												color="primary"
-												className="mx-2">
+												className="mx-4">
 												<Badge
 													badgeContent={6}
 													color="primary">
 													<ShoppingCartIcon />
 												</Badge>
-											</IconButton>
-											<IconButton
+											</StyledIconButton>
+											<StyledIconButton
 												edge="end"
 												color="inherit"
-												className="mx-2">
+												className="mx-4">
 												<Badge
 													badgeContent={5}
 													color="primary">
 													<NotificationsIcon color="primary" />
 												</Badge>
-											</IconButton>
-											<IconButton
-												edge="end"
-												color="primary"
-												className="mx-2">
-												<Badge
-													badgeContent={6}
-													color="primary">
-													<SettingsIcon />
-												</Badge>
-											</IconButton>
-											<IconButton
+											</StyledIconButton>
+
+											<StyledIconButton
 												edge="end"
 												color="inherit"
 												onClick={handleClick}
-												className="mx-2">
+												className="mx-4">
 												<Badge
 													badgeContent={4}
 													color="primary">
 													<Avatar src={avatar} />
 												</Badge>
-											</IconButton>
+											</StyledIconButton>
 										</Hidden>
 									) : (
 										<ButtonLink
 											to="/login"
 											color="primary"
 											title="Login"
-											className={classes.button}
+											className={clsx(
+												classes.button,
+												"mx-2",
+											)}
 										/>
 									)}
 								</>
