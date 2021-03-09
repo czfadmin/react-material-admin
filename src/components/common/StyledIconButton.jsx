@@ -2,6 +2,8 @@ import { IconButton, withStyles } from "@material-ui/core";
 
 const StyledIconButton = withStyles((theme) => ({
 	root: {
+		// width: theme.spacing(3),
+		// height: theme.spacing(3),
 		"&:focus": {
 			outline: 0,
 			border: 0,

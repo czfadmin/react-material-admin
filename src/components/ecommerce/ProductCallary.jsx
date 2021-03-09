@@ -118,7 +118,7 @@ export default function ProductCallary() {
 	return (
 		<>
 			{callaryState.map((item) => (
-				<Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={item.id}>
+				<Grid item xs={12} sm={4} md={3} lg={2} xl={1} key={item.id}>
 					<ProductInfoCard data={item} />
 				</Grid>
 			))}
