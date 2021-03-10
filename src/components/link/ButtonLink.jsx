@@ -31,9 +31,5 @@ ButtonLink.propTypes = {
 };
 export default withStyles((theme) => ({
 	link: {},
-	button: {
-		"&:focus": {
-			// border: 0,
-		},
-	},
+	button: {},
 }))(ButtonLink);

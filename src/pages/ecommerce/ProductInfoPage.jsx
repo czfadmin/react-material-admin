@@ -10,6 +10,7 @@ import {
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import Comment from "../../components/common/Comment";
+import Recommends from "../../components/ecommerce/Recommends";
 import loginSvg from "../../illustration_login.svg";
 import logo from "../../logo.svg";
 const styles = (theme) => ({
@@ -82,6 +83,68 @@ const ProductInfoPage = (props) => {
 				rating: 2,
 			},
 		],
+		recommends: [
+			{
+				id: 1,
+				title: "good",
+				thumb: logo,
+				merchants: "czfadmin",
+				desc: "这双鞋子很不错,值得购买",
+				rating: 4,
+				price: 24,
+				commentNum: 5,
+			},
+			{
+				id: 2,
+				title: "bad",
+				thumb: logo,
+				merchants: "czfadmin",
+				desc: "这双鞋子很不错,值得购买",
+				rating: 2,
+				price: 24,
+				commentNum: 3,
+			},
+			{
+				id: 3,
+				title: "good",
+				thumb: logo,
+				merchants: "czfadmin",
+				desc: "这双鞋子很不错,值得购买",
+				rating: 4,
+				price: 24,
+				commentNum: 2,
+			},
+			{
+				id: 4,
+				title: "good",
+				thumb: logo,
+				merchants: "czfadmin",
+				desc: "这双鞋子很不错,值得购买",
+				rating: 4,
+				price: 24,
+				commentNum: 8,
+			},
+			{
+				id: 5,
+				title: "good",
+				thumb: logo,
+				merchants: "czfadmin",
+				desc: "这双鞋子很不错,值得购买",
+				rating: 4,
+				price: 24,
+				commentNum: 9,
+			},
+			{
+				id: 6,
+				title: "good",
+				thumb: logo,
+				merchants: "czfadmin",
+				desc: "这双鞋子很不错,值得购买",
+				rating: 3,
+				price: 34,
+				commentNum: 11,
+			},
+		],
 	});
 	const labels = [];
 	data.comments.map((it) => {
@@ -94,7 +157,7 @@ const ProductInfoPage = (props) => {
 		<Grid
 			className={clsx(
 				classes.root,
-				"flex flex-row items-center justify-around min-w-full  bg-gray-200"
+				"flex flex-row items-center justify-around min-w-full  bg-gray-200",
 			)}>
 			<Grid
 				item
@@ -107,7 +170,7 @@ const ProductInfoPage = (props) => {
 				<div
 					className={clsx(
 						classes.imageContainer,
-						"flex flex-row min-w-full border rounded-lg border-gray-300 m-2"
+						"flex flex-row min-w-full border rounded-lg border-gray-300 m-2",
 					)}>
 					{/* 轮播 */}
 					<Grid container>
@@ -139,7 +202,7 @@ const ProductInfoPage = (props) => {
 						</Grid>
 					</Grid>
 				</div>
-				<div item className={clsx(classes.commentContainer, "m-2")}>
+				<div className={clsx(classes.commentContainer, "m-2")}>
 					<div className={clsx(classes.labelContainer, "m-2")}>
 						{labels.map((it, index) => (
 							<Chip
@@ -159,7 +222,16 @@ const ProductInfoPage = (props) => {
 			</Grid>
 
 			<Hidden smDown>
-				<Grid item xs={12} sm={12} md={4} lg={4} xs={4}></Grid>
+				<Grid
+					item
+					xs={12}
+					sm={12}
+					md={4}
+					lg={4}
+					xs={4}
+					className={clsx(classes.recommends)}>
+					<Recommends recommends={data.recommends} />
+				</Grid>
 			</Hidden>
 		</Grid>
 	);
