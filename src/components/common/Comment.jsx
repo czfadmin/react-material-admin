@@ -1,4 +1,4 @@
-import { Avatar, TextField, Typography, withStyles } from "@material-ui/core";
+import { Avatar, Box, Typography, withStyles } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
@@ -7,24 +7,35 @@ import StyledIconButton from "../common/StyledIconButton";
 function Comment(props) {
 	const { classes, data } = props;
 	return (
-		<div className="flex flex-row items-center text-center min-w-full mx-2 p-4 shadow-md  rounded-md border-md">
-			<Avatar src={data.user.avatar} className="mx-2 " />
-			<div className="flex flex-col items-stretch">
-				<Typography
-					component="p"
-					variant="body2"
-					className="mx-2 text-xs ">
+		<div className="flex flex-row items-center text-center p-4 rounded-md border-md">
+			<Avatar src={data.user.avatar} className="mx-2" />
+			<Box p={2} className="flex flex-col items-start justify-start">
+				<Box className="flex flex-row items-center w-auto">
+					<Typography
+						className="mx-2 text-md font-medium text-center"
+						component="h6"
+						variant="h6">
+						{data.user.username}
+					</Typography>
+					<Typography
+						className="text-sm text-center text-gray-600 mx-2"
+						component="p"
+						variant="subtitle2">
+						{data.createTime}
+					</Typography>
+					<Rating
+						value={data.rating}
+						precision={0.1}
+						readOnly
+						size="small"
+						className="mx-2"
+					/>
+				</Box>
+				<Typography component="p" variant="body1" className="text-md">
 					{data.content}
 				</Typography>
-				<Rating
-					value={data.rating}
-					readOnly
-					precision={0.1}
-					className="mx-0"
-					size="small"
-				/>
-			</div>
-			<div className="flex flex-row mx-2 items-center my-auto ml-auto">
+			</Box>
+			<div className="flex flex-row mx-2 items-center ml-auto">
 				<StyledIconButton size="small">
 					<ThumbUpIcon fontSize="small" />
 				</StyledIconButton>

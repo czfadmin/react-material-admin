@@ -56,17 +56,11 @@ const DashboardLayout = (props) => {
 
 export default withStyles((theme) => ({
 	root: {
-		// background: "linear-gradient(45deg,red 30%,blue 75%)!important",
-		// width: "100%",
 		height: "100vh",
 		overflow: "auto",
 		paddingTop: 52,
 	},
 	contentContainer: {
-		// height: "100vh",
 		width: "100%",
-		marginTop: "1rem",
-		// height: "100%",
-		// overflow: "auto",
 	},
 }))(DashboardLayout);
