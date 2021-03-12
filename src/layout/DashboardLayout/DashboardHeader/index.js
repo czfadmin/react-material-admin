@@ -25,6 +25,7 @@ import ButtonLink from "../../../components/link/ButtonLink";
 import avatar from "../../../logo.svg";
 import { showSnackbar } from "../../../features/snackbar/snackbarSlice";
 import { toggleSwipeableDrawer } from "../../../features/drawer/drawerSlice";
+import SearchBar from "../../../components/common/Searchbar";
 const StyleMenu = withStyles({
 	paper: {
 		background: "#eeeeee;",
@@ -97,61 +98,66 @@ function DashboardHeader(props) {
 						{({ isSignedIn, user, providerId }) => {
 							return (
 								<>
-									<StyledIconButton
-										edge="end"
-										color="primary"
-										className="mx-5"
-										onClick={openSettingDrawer}>
-										<Badge badgeContent={6} color="primary">
-											<SettingsIcon />
-										</Badge>
-									</StyledIconButton>
-									{isSignedIn ? (
-										<Hidden xsDown>
-											<StyledIconButton
-												edge="end"
-												color="primary"
-												className="mx-4">
-												<Badge
-													badgeContent={6}
-													color="primary">
-													<ShoppingCartIcon />
-												</Badge>
-											</StyledIconButton>
-											<StyledIconButton
-												edge="end"
-												color="inherit"
-												className="mx-4">
-												<Badge
-													badgeContent={5}
-													color="primary">
-													<NotificationsIcon color="primary" />
-												</Badge>
-											</StyledIconButton>
-
-											<StyledIconButton
-												edge="end"
-												color="inherit"
-												onClick={handleClick}
-												className="mx-4">
-												<Badge
-													badgeContent={4}
-													color="primary">
-													<Avatar src={avatar} />
-												</Badge>
-											</StyledIconButton>
-										</Hidden>
-									) : (
-										<ButtonLink
-											to="/login"
+									<div className="flex flex-row items-center">
+										<SearchBar />
+										<StyledIconButton
+											edge="end"
 											color="primary"
-											title="Login"
-											className={clsx(
-												classes.button,
-												"mx-2",
-											)}
-										/>
-									)}
+											className="mx-5"
+											onClick={openSettingDrawer}>
+											<Badge
+												badgeContent={6}
+												color="primary">
+												<SettingsIcon />
+											</Badge>
+										</StyledIconButton>
+										{isSignedIn ? (
+											<Hidden xsDown>
+												<StyledIconButton
+													edge="end"
+													color="primary"
+													className="mx-4">
+													<Badge
+														badgeContent={6}
+														color="primary">
+														<ShoppingCartIcon />
+													</Badge>
+												</StyledIconButton>
+												<StyledIconButton
+													edge="end"
+													color="inherit"
+													className="mx-4">
+													<Badge
+														badgeContent={5}
+														color="primary">
+														<NotificationsIcon color="primary" />
+													</Badge>
+												</StyledIconButton>
+
+												<StyledIconButton
+													edge="end"
+													color="inherit"
+													onClick={handleClick}
+													className="mx-4">
+													<Badge
+														badgeContent={4}
+														color="primary">
+														<Avatar src={avatar} />
+													</Badge>
+												</StyledIconButton>
+											</Hidden>
+										) : (
+											<ButtonLink
+												to="/login"
+												color="primary"
+												title="Login"
+												className={clsx(
+													classes.button,
+													"mx-2",
+												)}
+											/>
+										)}
+									</div>
 								</>
 							);
 						}}
