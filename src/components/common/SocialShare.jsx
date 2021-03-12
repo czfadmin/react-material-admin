@@ -13,16 +13,16 @@ function SocialShare(props) {
 	return (
 		<div className="flex flex-row justify-around items-center mx-2 my-2">
 			<StyledIconButton color="primary">
-				<FacebookIcon />
+				<FacebookIcon fontSize="large" />
 			</StyledIconButton>
 			<StyledIconButton color="primary">
-				<TwitterIcon />
+				<TwitterIcon fontSize="large" />
 			</StyledIconButton>
 			<StyledIconButton color="secondary">
-				<InstagramIcon />
+				<InstagramIcon fontSize="large" />
 			</StyledIconButton>
 			<StyledIconButton color="primary">
-				<LinkedInIcon />
+				<LinkedInIcon fontSize="large" />
 			</StyledIconButton>
 		</div>
 	);

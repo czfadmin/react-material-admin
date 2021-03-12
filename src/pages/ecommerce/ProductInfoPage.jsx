@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
 	withStyles,
 	Typography,
@@ -7,19 +8,19 @@ import {
 	SvgIcon,
 	Tabs,
 	Tab,
-	AppBar,
+	Box,
 } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
 import clsx from "clsx";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+// import FavoriteIcon from "@material-ui/icons/Favorite";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
-import { useEffect, useState } from "react";
 import Comment from "../../components/common/Comment";
 import StyledButton from "../../components/common/StyledButton";
 import StyledIconButton from "../../components/common/StyledIconButton";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import TabPanel from "../../components/common/TabPanel";
-import Recommends from "../../components/ecommerce/Recommends";
 import loginSvg from "../../illustration_login.svg";
 import logo from "../../logo.svg";
 import clock from "../../svg/clock.svg";
@@ -28,10 +29,10 @@ import right from "../../svg/right.svg";
 import SocialShare from "../../components/common/SocialShare";
 import ProductItemDesc from "../../components/ecommerce/ProductItemDesc";
 import ProductMaterialIntro from "../../components/ecommerce/ProductMaterialIntro";
+import ReviewInfo from "../../components/ecommerce/ReviewInfo";
+
 const styles = (theme) => ({
-	root: {
-		// width: "100vw",
-	},
+	root: {},
 	chip: {
 		margin: "0.45rem",
 	},
@@ -82,12 +83,18 @@ const styles = (theme) => ({
 			backgroundColor: "#008000e0",
 		},
 	},
+	loveButton: {
+		marginLeft: "auto !important",
+	},
 	introductionContainer: {},
 	papper: {},
 	tabs: {
 		"$ > button:focus": {
 			outline: 0,
 		},
+	},
+	gridItem: {
+		padding: "0.5rem",
 	},
 });
 
@@ -107,6 +114,7 @@ const ProductInfoPage = (props) => {
 		rating: 3,
 		image: [loginSvg],
 		volume: 100,
+		available: 80,
 		comments: [
 			{
 				id: 1,
@@ -116,7 +124,7 @@ const ProductInfoPage = (props) => {
 					avatar: logo,
 				},
 				createTime: "2020-04-01",
-				content: "这双鞋子很不错,值得购买",
+				content: "Ut hic et excepturi quis veniam.",
 				rating: 4,
 			},
 			{
@@ -127,7 +135,8 @@ const ProductInfoPage = (props) => {
 					avatar: logo,
 				},
 				createTime: "2020-04-01",
-				content: "这双鞋子很不错,值得购买",
+				content:
+					"Repudiandae accusamus repellendus dolor quia et dolorem distinctio qui. Nulla eaque dolor aut ipsa. Perspiciatis odio aut amet ut id atque architecto.",
 				rating: 4,
 			},
 			{
@@ -138,7 +147,8 @@ const ProductInfoPage = (props) => {
 					avatar: logo,
 				},
 				createTime: "2020-04-01",
-				content: "这双鞋子很不错,值得购买",
+				content:
+					"Adipisci quidem officiis itaque laudantium quidem voluptas esse. Officiis odio distinctio atque sunt neque doloremque officiis. Voluptas perspiciatis et et reprehenderit quia. Dolores similique ut sed sed et dolorem eos id. Unde ea veritatis",
 				rating: 4,
 			},
 			{
@@ -149,7 +159,8 @@ const ProductInfoPage = (props) => {
 					avatar: logo,
 				},
 				createTime: "2020-04-01",
-				content: "这双鞋子很不错,值得购买",
+				content:
+					"Quod id alias ipsa sed delectus corporis dolore. Dolores aut consequatur eos est architecto ullam optio. Dicta qui id placeat voluptas reprehenderit laboriosam porro. Nostrum sed amet voluptatem aut mollitia debitis distinctio id",
 				rating: 1,
 			},
 			{
@@ -160,7 +171,8 @@ const ProductInfoPage = (props) => {
 					avatar: logo,
 				},
 				createTime: "2020-04-01",
-				content: "这双鞋子很不错,值得购买",
+				content:
+					"Laudantium quia quae illo illo aut recusandae nemo dolores dolor. Blanditiis sapiente rerum excepturi libero tempore officiis.",
 				rating: 2,
 			},
 		],
@@ -271,27 +283,45 @@ const ProductInfoPage = (props) => {
 				container
 				className={clsx(
 					classes.productInfoContainer,
-					"shadow-lg bg-gray-50 rounded-md p-2",
-				)}
-				spacing={2}>
-				<Grid item xs={12} sm={6} md={6} lg={6}>
+					"shadow-lg bg-gray-50 rounded-md p-2 min-w-full self-center"
+				)}>
+				<Grid
+					item
+					xs={12}
+					sm={12}
+					md={6}
+					lg={6}
+					className={classes.gridItem}>
 					<img
 						src={data.image}
 						alt={data.title}
 						className="bg-cover w-auto h-auto"
 					/>
 				</Grid>
-				<Grid item xs={12} sm={6} md={6} lg={6}>
+				<Grid
+					item
+					xs={12}
+					sm={12}
+					md={6}
+					lg={6}
+					className={classes.gridItem}>
 					<div className="flex flex-col items-start min-w-full">
-						<Typography
-							component="p"
-							variant="body2"
-							className="text-red-600">
-							LOW STOCK
-						</Typography>
-						<Typography component="h5" variant="h5">
-							{data.title}
-						</Typography>
+						<div className="flex flex-row items-center min-w-full">
+							<div className="flex flex-col items-start">
+								<Typography
+									component="p"
+									variant="body2"
+									className="text-red-600">
+									LOW STOCK
+								</Typography>
+								<Typography component="h5" variant="h5">
+									{data.title}
+								</Typography>
+							</div>
+							<StyledIconButton className={classes.loveButton}>
+								<FavoriteBorderIcon fontSize="default" />
+							</StyledIconButton>
+						</div>
 						<div className="flex flex-row items-center min-w-full mt-2">
 							<Rating
 								name="rating"
@@ -319,42 +349,50 @@ const ProductInfoPage = (props) => {
 					<div
 						className={clsx(
 							classes.controlContainer,
-							"flex flex-row items-start mt-1",
+							"flex flex-row items-start mt-1"
 						)}>
-						<Typography component="h6" variant="h6">
+						<Typography component="p" variant="body1">
 							Color
 						</Typography>
 					</div>
 					<div
 						className={clsx(
 							classes.controlContainer,
-							"flex flex-row items-start",
+							"flex flex-row items-start"
 						)}>
-						<Typography component="h6" variant="h6">
+						<Typography component="p" variant="body1">
 							Size
 						</Typography>
 					</div>
 					<div
 						className={clsx(
 							classes.controlContainer,
-							"flex flex-row items-start min-w-full",
+							"flex flex-row items-center min-w-full"
 						)}>
-						<Typography component="h6" variant="h6">
+						<Typography component="p" variant="body1">
 							Quantity
 						</Typography>
-						<div
-							className={clsx(
-								classes.numericUpDown,
-								"flex flex-row items-center ml-auto w-32 rounded-md border-2",
-							)}>
-							<StyledIconButton size="small">
-								<RemoveIcon />
-							</StyledIconButton>
-							<TextField className={classes.textField} />
-							<StyledIconButton size="small">
-								<AddIcon />
-							</StyledIconButton>
-						</div>
+						<Box className="flex flex-col  items-end text-center ml-auto">
+							<div
+								className={clsx(
+									classes.numericUpDown,
+									"flex flex-row items-center ml-auto w-32 rounded-md border-2"
+								)}>
+								<StyledIconButton size="small">
+									<RemoveIcon />
+								</StyledIconButton>
+								<TextField className={classes.textField} />
+								<StyledIconButton size="small">
+									<AddIcon />
+								</StyledIconButton>
+							</div>
+							<Typography
+								component="p"
+								variant="body1"
+								className="mx-2 text-center">
+								{`Available: ${data.available}`}
+							</Typography>
+						</Box>
 					</div>
 					<span
 						className={clsx(classes.divider, "min-w-full my-4")}
@@ -362,8 +400,12 @@ const ProductInfoPage = (props) => {
 					<Grid container className="min-w-full my-4" spacing={2}>
 						<Grid item xs={12} sm={12} md={6} lg={6}>
 							<StyledButton
-								className={clsx(classes.styledButton, "p-1")}
+								className={clsx(
+									classes.styledButton,
+									"p-1 shadow-lg"
+								)}
 								fullWidth
+								size="medium"
 								startIcon={<ShoppingCartIcon />}>
 								<Typography>Add to cart</Typography>
 							</StyledButton>
@@ -374,7 +416,10 @@ const ProductInfoPage = (props) => {
 								fullWidth
 								color="primary"
 								variant="contained"
-								className={clsx(classes.styledButton2, "p-1")}>
+								className={clsx(
+									classes.styledButton2,
+									"p-1 shadow-lg"
+								)}>
 								Buy Now
 							</StyledButton>
 						</Grid>
@@ -403,7 +448,7 @@ const ProductInfoPage = (props) => {
 			<div
 				className={clsx(
 					classes.paper,
-					" min-w-full h-auto mt-16 bg-gray-50 rounded-md shadow-lg",
+					" min-w-full h-auto mt-16 bg-gray-50 rounded-md shadow-lg"
 				)}>
 				<Tabs
 					value={tabPageValue}
@@ -422,6 +467,7 @@ const ProductInfoPage = (props) => {
 					/>
 				</TabPanel>
 				<TabPanel index={1} value={tabPageValue}>
+					<ReviewInfo />
 					{data.comments.map((it) => (
 						<Comment data={it} key={it.id} />
 					))}

@@ -3,22 +3,32 @@ import { Rating } from "@material-ui/lab";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 
+import clsx from "clsx";
+
 import StyledIconButton from "../common/StyledIconButton";
 function Comment(props) {
 	const { classes, data } = props;
 	return (
-		<div className="flex flex-row items-center text-center p-4 rounded-md border-md">
-			<Avatar src={data.user.avatar} className="mx-2" />
-			<Box p={2} className="flex flex-col items-start justify-start">
+		<div className="flex flex-row items-center text-center p-4 rounded-md border-b-2">
+			<Avatar
+				src={data.user.avatar}
+				className={clsx(classes.avatar, "mx-2")}
+			/>
+			<Box p={1} className="flex flex-col items-start justify-start">
 				<Box className="flex flex-row items-center w-auto">
 					<Typography
-						className="mx-2 text-md font-medium text-center"
+						className={clsx(
+							"text-xs text-center text-gray-600 mx-2"
+						)}
 						component="h6"
 						variant="h6">
 						{data.user.username}
 					</Typography>
 					<Typography
-						className="text-sm text-center text-gray-600 mx-2"
+						className={clsx(
+							classes.typography,
+							"text-xs text-center text-gray-500 mx-2"
+						)}
 						component="p"
 						variant="subtitle2">
 						{data.createTime}
@@ -28,22 +38,56 @@ function Comment(props) {
 						precision={0.1}
 						readOnly
 						size="small"
-						className="mx-2"
+						className="mx-0"
 					/>
 				</Box>
-				<Typography component="p" variant="body1" className="text-md">
+				<Typography
+					component="p"
+					variant="body2"
+					className={
+						(classes.content, "text-sm text-left text-gray-700")
+					}>
 					{data.content}
 				</Typography>
 			</Box>
 			<div className="flex flex-row mx-2 items-center ml-auto">
-				<StyledIconButton size="small">
-					<ThumbUpIcon fontSize="small" />
-				</StyledIconButton>
-				<StyledIconButton size="small">
-					<ThumbDownIcon fontSize="small" />
-				</StyledIconButton>
+				<Box>
+					<StyledIconButton size="medium">
+						<ThumbUpIcon fontSize="default" />
+					</StyledIconButton>
+					<Typography
+						component="p"
+						variant="body2"
+						className="text-gray-600">
+						120
+					</Typography>
+				</Box>
+				<Box>
+					<StyledIconButton size="medium">
+						<ThumbDownIcon fontSize="default" />
+					</StyledIconButton>
+					<Typography
+						component="p"
+						variant="body2"
+						className="text-gray-600">
+						120
+					</Typography>
+				</Box>
 			</div>
 		</div>
 	);
 }
-export default withStyles((theme) => ({}))(Comment);
+export default withStyles((theme) => ({
+	typography: {
+		margin: "auto 0.5rem",
+		textAlign: "text-center",
+		fontSize: "0.9rem",
+	},
+
+	avatar: {
+		borderRadius: "50%",
+		width: "64px",
+		height: "64px",
+		backgroundColor: "rgba(0, 171, 85, 0.08)",
+	},
+}))(Comment);
