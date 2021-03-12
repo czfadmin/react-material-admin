@@ -85,6 +85,8 @@ const styles = (theme) => ({
 	},
 	loveButton: {
 		marginLeft: "auto !important",
+		marginRight: "0",
+		textAlign: "right",
 	},
 	introductionContainer: {},
 	papper: {},
@@ -283,7 +285,7 @@ const ProductInfoPage = (props) => {
 				container
 				className={clsx(
 					classes.productInfoContainer,
-					"shadow-lg bg-gray-50 rounded-md p-2 min-w-full self-center"
+					"shadow-lg bg-gray-50 rounded-md p-2 min-w-full self-center",
 				)}>
 				<Grid
 					item
@@ -349,7 +351,7 @@ const ProductInfoPage = (props) => {
 					<div
 						className={clsx(
 							classes.controlContainer,
-							"flex flex-row items-start mt-1"
+							"flex flex-row items-start mt-1",
 						)}>
 						<Typography component="p" variant="body1">
 							Color
@@ -358,7 +360,7 @@ const ProductInfoPage = (props) => {
 					<div
 						className={clsx(
 							classes.controlContainer,
-							"flex flex-row items-start"
+							"flex flex-row items-start",
 						)}>
 						<Typography component="p" variant="body1">
 							Size
@@ -367,7 +369,7 @@ const ProductInfoPage = (props) => {
 					<div
 						className={clsx(
 							classes.controlContainer,
-							"flex flex-row items-center min-w-full"
+							"flex flex-row items-center min-w-full",
 						)}>
 						<Typography component="p" variant="body1">
 							Quantity
@@ -376,7 +378,7 @@ const ProductInfoPage = (props) => {
 							<div
 								className={clsx(
 									classes.numericUpDown,
-									"flex flex-row items-center ml-auto w-32 rounded-md border-2"
+									"flex flex-row items-center ml-auto w-32 rounded-md border-2",
 								)}>
 								<StyledIconButton size="small">
 									<RemoveIcon />
@@ -402,7 +404,7 @@ const ProductInfoPage = (props) => {
 							<StyledButton
 								className={clsx(
 									classes.styledButton,
-									"p-1 shadow-lg"
+									"p-1 shadow-lg",
 								)}
 								fullWidth
 								size="medium"
@@ -418,7 +420,7 @@ const ProductInfoPage = (props) => {
 								variant="contained"
 								className={clsx(
 									classes.styledButton2,
-									"p-1 shadow-lg"
+									"p-1 shadow-lg",
 								)}>
 								Buy Now
 							</StyledButton>
@@ -448,7 +450,7 @@ const ProductInfoPage = (props) => {
 			<div
 				className={clsx(
 					classes.paper,
-					" min-w-full h-auto mt-16 bg-gray-50 rounded-md shadow-lg"
+					" min-w-full h-auto mt-16 bg-gray-50 rounded-md shadow-lg",
 				)}>
 				<Tabs
 					value={tabPageValue}

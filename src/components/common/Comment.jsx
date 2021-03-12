@@ -2,14 +2,14 @@ import { Avatar, Box, Typography, withStyles } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
-
+import CommentIcon from "@material-ui/icons/Comment";
 import clsx from "clsx";
 
 import StyledIconButton from "../common/StyledIconButton";
 function Comment(props) {
 	const { classes, data } = props;
 	return (
-		<div className="flex flex-row items-center text-center p-4 rounded-md border-b-2">
+		<div className="flex flex-row items-center text-center p-2 rounded-md border-b-2">
 			<Avatar
 				src={data.user.avatar}
 				className={clsx(classes.avatar, "mx-2")}
@@ -18,7 +18,7 @@ function Comment(props) {
 				<Box className="flex flex-row items-center w-auto">
 					<Typography
 						className={clsx(
-							"text-xs text-center text-gray-600 mx-2"
+							"text-xs text-center text-gray-600 mx-2",
 						)}
 						component="h6"
 						variant="h6">
@@ -27,7 +27,7 @@ function Comment(props) {
 					<Typography
 						className={clsx(
 							classes.typography,
-							"text-xs text-center text-gray-500 mx-2"
+							"text-xs text-center text-gray-500 mx-2",
 						)}
 						component="p"
 						variant="subtitle2">
@@ -51,28 +51,27 @@ function Comment(props) {
 				</Typography>
 			</Box>
 			<div className="flex flex-row mx-2 items-center ml-auto">
-				<Box>
-					<StyledIconButton size="medium">
-						<ThumbUpIcon fontSize="default" />
-					</StyledIconButton>
+				<StyledIconButton size="medium">
+					<ThumbUpIcon fontSize="small" />
 					<Typography
 						component="p"
 						variant="body2"
-						className="text-gray-600">
+						className="text-gray-600 px-1">
 						120
 					</Typography>
-				</Box>
-				<Box>
-					<StyledIconButton size="medium">
-						<ThumbDownIcon fontSize="default" />
-					</StyledIconButton>
+				</StyledIconButton>
+				<StyledIconButton size="medium">
+					<ThumbDownIcon fontSize="small" />
 					<Typography
 						component="p"
 						variant="body2"
-						className="text-gray-600">
+						className="text-gray-600 px-1">
 						120
 					</Typography>
-				</Box>
+				</StyledIconButton>
+				<StyledIconButton>
+					<CommentIcon fontSize="small" />
+				</StyledIconButton>
 			</div>
 		</div>
 	);
