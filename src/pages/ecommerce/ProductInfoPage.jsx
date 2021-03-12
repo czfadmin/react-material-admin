@@ -4,23 +4,18 @@ import {
 	Typography,
 	Grid,
 	TextField,
-	Paper,
-	SvgIcon,
-	Tabs,
-	Tab,
 	Box,
 } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
 import clsx from "clsx";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-// import FavoriteIcon from "@material-ui/icons/Favorite";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
-import Comment from "../../components/common/Comment";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+
 import StyledButton from "../../components/common/StyledButton";
 import StyledIconButton from "../../components/common/StyledIconButton";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import TabPanel from "../../components/common/TabPanel";
+
 import loginSvg from "../../illustration_login.svg";
 import logo from "../../logo.svg";
 import clock from "../../svg/clock.svg";
@@ -28,8 +23,8 @@ import security from "../../svg/security.svg";
 import right from "../../svg/right.svg";
 import SocialShare from "../../components/common/SocialShare";
 import ProductItemDesc from "../../components/ecommerce/ProductItemDesc";
-import ProductMaterialIntro from "../../components/ecommerce/ProductMaterialIntro";
-import ReviewInfo from "../../components/ecommerce/ReviewInfo";
+
+import ProductDescReviewInfo from "../../components/ecommerce/ProductDescReviewInfo";
 
 const styles = (theme) => ({
 	root: {},
@@ -100,12 +95,6 @@ const styles = (theme) => ({
 	},
 });
 
-function a11yProps(index) {
-	return {
-		id: `full-width-tab-${index}`,
-		"aria-controls": `full-width-tabpanel-${index}`,
-	};
-}
 const ProductInfoPage = (props) => {
 	const { classes } = props;
 	const [data, setData] = useState({
@@ -268,10 +257,7 @@ const ProductInfoPage = (props) => {
 		},
 	});
 	const labels = [];
-	const [tabPageValue, setTabPageValue] = useState(0);
-	const handleTabChange = (event, newValue) => {
-		setTabPageValue(newValue);
-	};
+
 	data.comments.map((it) => {
 		if (labels.indexOf(it.label) !== -1) {
 			return;
@@ -285,7 +271,7 @@ const ProductInfoPage = (props) => {
 				container
 				className={clsx(
 					classes.productInfoContainer,
-					"shadow-lg bg-gray-50 rounded-md p-2 min-w-full self-center",
+					"shadow-lg bg-gray-50 rounded-md p-2 min-w-full self-center"
 				)}>
 				<Grid
 					item
@@ -351,7 +337,7 @@ const ProductInfoPage = (props) => {
 					<div
 						className={clsx(
 							classes.controlContainer,
-							"flex flex-row items-start mt-1",
+							"flex flex-row items-start mt-1"
 						)}>
 						<Typography component="p" variant="body1">
 							Color
@@ -360,7 +346,7 @@ const ProductInfoPage = (props) => {
 					<div
 						className={clsx(
 							classes.controlContainer,
-							"flex flex-row items-start",
+							"flex flex-row items-start"
 						)}>
 						<Typography component="p" variant="body1">
 							Size
@@ -369,7 +355,7 @@ const ProductInfoPage = (props) => {
 					<div
 						className={clsx(
 							classes.controlContainer,
-							"flex flex-row items-center min-w-full",
+							"flex flex-row items-center min-w-full"
 						)}>
 						<Typography component="p" variant="body1">
 							Quantity
@@ -378,7 +364,7 @@ const ProductInfoPage = (props) => {
 							<div
 								className={clsx(
 									classes.numericUpDown,
-									"flex flex-row items-center ml-auto w-32 rounded-md border-2",
+									"flex flex-row items-center ml-auto w-32 rounded-md border-2"
 								)}>
 								<StyledIconButton size="small">
 									<RemoveIcon />
@@ -404,7 +390,7 @@ const ProductInfoPage = (props) => {
 							<StyledButton
 								className={clsx(
 									classes.styledButton,
-									"p-1 shadow-lg",
+									"p-1 shadow-lg"
 								)}
 								fullWidth
 								size="medium"
@@ -420,7 +406,7 @@ const ProductInfoPage = (props) => {
 								variant="contained"
 								className={clsx(
 									classes.styledButton2,
-									"p-1 shadow-lg",
+									"p-1 shadow-lg"
 								)}>
 								Buy Now
 							</StyledButton>
@@ -446,35 +432,10 @@ const ProductInfoPage = (props) => {
 					</Grid>
 				))}
 			</Grid>
-
-			<div
-				className={clsx(
-					classes.paper,
-					" min-w-full h-auto mt-16 bg-gray-50 rounded-md shadow-lg",
-				)}>
-				<Tabs
-					value={tabPageValue}
-					onChange={handleTabChange}
-					indicatorColor="primary"
-					textColor="primary"
-					className={classes.tabs}
-					aria-label="Description and Reviews Tab Page">
-					<Tab label="Descriptions" {...a11yProps(0)} />
-					<Tab label="Review" {...a11yProps(1)} />
-				</Tabs>
-				<TabPanel index={0} value={tabPageValue}>
-					<ProductMaterialIntro
-						specification={data.materials.specification}
-						materials={data.materials.materials}
-					/>
-				</TabPanel>
-				<TabPanel index={1} value={tabPageValue}>
-					<ReviewInfo />
-					{data.comments.map((it) => (
-						<Comment data={it} key={it.id} />
-					))}
-				</TabPanel>
-			</div>
+			<ProductDescReviewInfo
+				comments={data.comments}
+				materials={data.materials}
+			/>
 		</div>
 	);
 };
